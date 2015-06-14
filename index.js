@@ -1,3 +1,5 @@
+//index.js
+
 //Template只作用於使用者端，因此相關程式碼也應只在使用者端作用
 if (Meteor.isClient) {
   //在template clock裡註冊名為nowString的helpers
