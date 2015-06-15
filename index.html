@@ -5,8 +5,12 @@
 
 <body>
   {{> clock}}
+  {{> clock}}
+  {{> clock}}
 </body>
 
 <template name="clock">
-  {{i18n 'Current time is'}}: {{nowString}}
+  <div>
+    {{i18n 'Current time is'}}: {{nowString}}
+  </div>
 </template>
