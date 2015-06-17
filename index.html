@@ -4,13 +4,19 @@
 </head>
 
 <body>
-  {{> clock}}
-  {{> clock}}
-  {{> clock}}
+  {{#with dataOfClock1}}
+    {{> clock}}
+  {{/with}}
+  {{#with dataOfClock2}}
+    {{> clock}}
+  {{/with}}
+  {{#with dataOfClock3}}
+    {{> clock}}
+  {{/with}}
 </body>
 
 <template name="clock">
   <div>
-    {{i18n 'Current time is'}}: {{nowString}}
+    現在位於時區「{{this.timezone}}」的時間是: {{nowString}}
   </div>
 </template>
