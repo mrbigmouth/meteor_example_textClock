@@ -17,6 +17,16 @@
 
 <template name="clock">
   <div>
-    現在位於時區「{{this.timezone}}」的時間是: {{nowString}}
+    現在位於時區「{{this.timezoneText}}」的時間是: {{nowString}}。
+    可以將使用時區改為
+    <select>
+      {{#each timezoneList}}
+        {{#if isEqual ../timezoneId this.timezoneId}}
+          <option value="{{this.timezoneId}}" selected>{{this.timezoneText}}</option>
+        {{else}}
+          <option value="{{this.timezoneId}}">{{this.timezoneText}}</option>
+        {{/if}}
+      {{/each}}
+    </select>
   </div>
 </template>
