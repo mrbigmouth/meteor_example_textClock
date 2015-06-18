@@ -31,25 +31,31 @@ if (Meteor.isClient) {
 
   //定義body中#with使用的helpers
   Template.registerHelper('dataOfClock1', function() {
+    var data = {clockId: 1};
     //取得clock 1使用的timezone id
     var useTimezoneId = dataOfClock1.get();
     //在timezoneList找尋使用的timezone
-    var timezone = _.findWhere(timezoneList, {timezoneId: useTimezoneId});
-    return timezone;
+    var timezoneData = _.findWhere(timezoneList, {timezoneId: useTimezoneId});
+    data = _.extend(data, timezoneData);
+    return data;
   });
   Template.registerHelper('dataOfClock2', function() {
+    var data = {clockId: 2};
     //取得clock 2使用的timezone id
     var useTimezoneId = dataOfClock2.get();
     //在timezoneList找尋使用的timezone
-    var timezone = _.findWhere(timezoneList, {timezoneId: useTimezoneId});
-    return timezone;
+    var timezoneData = _.findWhere(timezoneList, {timezoneId: useTimezoneId});
+    data = _.extend(data, timezoneData);
+    return data;
   });
   Template.registerHelper('dataOfClock3', function() {
+    var data = {clockId: 3};
     //取得clock 3使用的timezone id
     var useTimezoneId = dataOfClock3.get();
     //在timezoneList找尋使用的timezone
-    var timezone = _.findWhere(timezoneList, {timezoneId: useTimezoneId});
-    return timezone;
+    var timezoneData = _.findWhere(timezoneList, {timezoneId: useTimezoneId});
+    data = _.extend(data, timezoneData);
+    return data;
   });
 
   //將「當前UTC時間」作為響應式資料來源
@@ -80,5 +86,25 @@ if (Meteor.isClient) {
   //定義isEqual helper
   Template.registerHelper('isEqual', function(var1, var2) {
     return var1 === var2;
+  });
+  //註冊clock事件
+  Template.clock.events({
+    'change select' : function(event, instance) {
+      var $emiter = $(event.currentTarget);
+      var selectedTimezondId = parseInt($emiter.val(), 10);
+      var clockId = instance.data.clockId;
+      var data;
+      switch (clockId) {
+      case 1:
+        dataOfClock1.set(selectedTimezondId);
+        break;
+      case 2:
+        dataOfClock2.set(selectedTimezondId);
+        break;
+      case 3:
+        dataOfClock3.set(selectedTimezondId);
+        break;
+      }
+    }
   });
 }
